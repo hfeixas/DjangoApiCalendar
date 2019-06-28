@@ -1,0 +1,58 @@
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Oncall</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="/static/vendor/js/jquery.min.js"></script>
+    <script src="/static/vendor/js/jquery-ui.min.js"></script>
+    <script src="/static/vendor/js/moment.min.js"></script>
+    <script src="/static/vendor/js/fullcalendar.min.js"></script>
+    <link href="/static/vendor/css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="https://bootswatch.com/3/darkly/bootstrap.min.css" rel="stylesheet" />
+    <!-- <link href="https://bootswatch.com/3/darkly/bootstrap.css" rel="stylesheet" /> -->
+    <!-- <link href="/static/vendor/css/fullcalendar.print.min.css" rel="stylesheet" />
+    -->
+</head>
+
+
+<body>
+        <div id='calendar' class="sideBar-hidden" ></div>
+</body>
+
+<script>
+        var OncallCalendar = $('#calendar').fullCalendar({
+    plugins: [ 'bootstrap', 'interaction', 'dayGrid', 'timeGrid', 'list' ], 
+    themeSystem: 'bootstrap3',
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,listMonth'
+    },
+    timezone: new Date().getTimezoneOffset(),
+    theme: true,
+    eventResourceEditable: false,
+    height: 850,
+    eventOverlap: true,
+    eventOrder: '-end',
+    allDay: true,
+    allDayText: 'Oncall',  
+    slotLabelFormat:'HH:mm',
+    timeFormat: 'HH:mm',
+    contentHeight: 'auto',
+    contentWidth: '4',
+    // navLinks: true, 
+    businessHours: false, 
+    editable: true,    
+    eventSources: [ {
+                // backgroundColor: 'blue',
+                url: '/calendar/api?format=json',
+                type: 'GET',
+                event_source: 'oncall',
+            }, 
+            ],
+        });
+</script>
+    
+</html>
+
